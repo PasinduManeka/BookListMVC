@@ -45,6 +45,7 @@ function loadDataTable() {
     })
 }
 
+//Delete function
 function Delete(url) {
     //Display sweet alert
     swal({
