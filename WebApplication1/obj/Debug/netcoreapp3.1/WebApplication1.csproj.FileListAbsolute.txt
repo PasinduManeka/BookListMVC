@@ -372,3 +372,4 @@ D:\Visual Studio Workspace 2\BookListMVC\WebApplication1\WebApplication1\obj\Deb
 D:\Visual Studio Workspace 2\BookListMVC\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.pdb
 D:\Visual Studio Workspace 2\BookListMVC\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.genruntimeconfig.cache
 D:\Visual Studio Workspace 2\BookListMVC\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Books\Index.cshtml.g.cs
+D:\Visual Studio Workspace 2\BookListMVC\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Books\Upsert.cshtml.g.cs

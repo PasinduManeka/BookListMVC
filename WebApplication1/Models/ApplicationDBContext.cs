@@ -13,6 +13,6 @@ namespace WebApplication1.Models
         }
 
         //book model that added to the databse
-        public DbSet<Book> Book { get; set; }
+        public DbSet<Book> Books { get; set; }
     }
 }

@@ -41,13 +41,37 @@ namespace WebApplication1.Controllers
             }
             //update
             //Populate the book object based on the databse with paseed ID
-            Book = _db.Book.FirstOrDefault(u => u.ID == id);
+            Book = _db.Books.FirstOrDefault(u => u.ID == id);
             if (Book == null)
             {
                 return NotFound();
             }
-            return View(Book    );
+            return View(Book);
             //Console.WriteLine("ID:",id);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert()
+        {
+            if (ModelState.IsValid)
+            {
+                //check id null or not
+                if (Book.ID == 0)
+                {
+                    _db.Books.Add(Book);
+                }
+                else
+                {
+                    _db.Books.Update(Book);
+                }
+
+                //Save change on the DB
+                _db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(Book);
 
         }
 
@@ -56,14 +80,14 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Json(new { data = await _db.Book.ToListAsync() });
+            return Json(new { data = await _db.Books.ToListAsync() });
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
             //get the book from DB related to the ID
-            var bookFromDB = await _db.Book.FirstOrDefaultAsync(u => u.ID == id);
+            var bookFromDB = await _db.Books.FirstOrDefaultAsync(u => u.ID == id);
 
             //null
             if (bookFromDB == null)
@@ -72,7 +96,7 @@ namespace WebApplication1.Controllers
             }
 
             //not null
-            _db.Book.Remove(bookFromDB);
+            _db.Books.Remove(bookFromDB);
             await _db.SaveChangesAsync();
             return Json(new { success = true, message = "Deleted Successfully!!" });
 
