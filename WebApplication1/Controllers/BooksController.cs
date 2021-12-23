@@ -10,6 +10,10 @@ namespace WebApplication1.Controllers
 {
     public class BooksController : Controller
     {
+        //Create book object with upsert
+        [BindProperty]
+        public Book Book { get; set; }
+
         //create a object of the applicationDBContext for databse connection
         private readonly ApplicationDBContext _db;
 
@@ -22,6 +26,29 @@ namespace WebApplication1.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        //UPSERT 
+        //parameter can be null(?)
+        public IActionResult Upsert(int? id)
+        {
+            Book = new Book();
+            //Check id null or not
+            if (id == null)
+            {
+                //create
+                return View(Book);
+            }
+            //update
+            //Populate the book object based on the databse with paseed ID
+            Book = _db.Book.FirstOrDefault(u => u.ID == id);
+            if (Book == null)
+            {
+                return NotFound();
+            }
+            return View(Book    );
+            //Console.WriteLine("ID:",id);
+
         }
 
         #region API Calls        
